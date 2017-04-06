@@ -8,14 +8,18 @@
 
 import Foundation
 
-func documentsDirectory()->URL {
-    return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first! as URL
-}
-
-func tempDirectory()->String {
-    return NSTemporaryDirectory()
-}
-
-func cachesDirectory()->URL {
-    return FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first! as URL
+extension FileManager {
+    
+    static var documentsDirectory: URL {
+        return self.default.urls(for: .documentDirectory, in: .userDomainMask).first! as URL
+    }
+    
+    static var tempDirectory: URL {
+        return self.default.temporaryDirectory
+    }
+    
+    static var cachesDirectory: URL {
+        return self.default.urls(for: .cachesDirectory, in: .userDomainMask).first! as URL
+    }
+    
 }

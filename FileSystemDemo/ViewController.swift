@@ -12,8 +12,9 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(documentsDirectory())
-        // Do any additional setup after loading the view, typically from a nib.
+        print(FileManager.tempDirectory)
+        print(FileManager.documentsDirectory)
+        print(FileManager.cachesDirectory)
     }
 
     override func didReceiveMemoryWarning() {
