@@ -15,6 +15,8 @@ class ViewController: UIViewController {
         print(FileManager.tempDirectory)
         print(FileManager.documentsDirectory)
         print(FileManager.cachesDirectory)
+        
+        // MARK: - Save text to documents directory
         let fileName = "playerName"
         let playerName = "Xander"
         let path = FileManager.documentsDirectory.appendingPathComponent(fileName).appendingPathExtension("txt")
@@ -53,6 +55,19 @@ class ViewController: UIViewController {
         let playerName3 = "Buffy"
         let path3 = FileManager.filePathInDocumentsDirectory(fileName: "playerName3.txt")
         try! playerName3.write(to: path3, atomically: true, encoding: String.Encoding.utf8)
+        
+        // MARK: - Save and Read Arrays - 
+        let array = NSMutableArray()
+        array.addObjects(from: ["red", "green", "blue"])
+        let arrayPath = FileManager.filePathInDocumentsDirectory(fileName: "colors.plist")
+        let success = array.write(to: arrayPath, atomically: true)
+        if success {
+            print("Wrote \(arrayPath) to disk")
+            // read it back from the disk
+            print (NSMutableArray(contentsOf: arrayPath)!)
+        } else {
+            print("Did not write \(arrayPath) to disk")
+        }
     }
 
     override func didReceiveMemoryWarning() {
