@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension FileManager {
     
@@ -69,4 +70,15 @@ extension FileManager {
         }
     }
     
+}
+
+extension UIImage {
+    func saveImageAsPNG(url: URL) {
+        let pngData = UIImagePNGRepresentation(self)
+        do {
+            try pngData?.write(to: url)
+        } catch {
+            print("Error: saving \(url) - errors=\(error)")
+        }
+    }
 }

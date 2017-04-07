@@ -96,6 +96,27 @@ class ViewController: UIViewController {
         // MARK: - Test clear helper function
         FileManager.clearDocumentsFolder()
         print(FileManager.contentsOfDir(url: FileManager.documentsDirectory))
+        
+        // MARK: - Test image save helper functions
+        print("---------------")
+        print("Outside DispatchQueue - Thread.isMainThread=\(Thread.isMainThread)")
+        DispatchQueue.global(qos: .background).async {
+            print("Inside DispatchQueue - Thread.isMainThread=\(Thread.isMainThread)")
+            if let url = URL(string: "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png") {
+                let startTime = NSDate().timeIntervalSince1970
+                do {
+                    let imageData = try Data(contentsOf: url)
+                    let image = UIImage(data: imageData)
+                    let totalTime = NSDate().timeIntervalSince1970 - startTime
+                    print("time to load = \(totalTime) seconds")
+                    let url = FileManager.filePathInDocumentsDirectory(fileName: "google.png")
+                    image?.saveImageAsPNG(url: url)
+                    print("Save image to \(url)")
+                } catch {
+                    print("ERROR: \(error)")
+                }
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
