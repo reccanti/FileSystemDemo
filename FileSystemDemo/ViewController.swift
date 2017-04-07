@@ -69,7 +69,7 @@ class ViewController: UIViewController {
             print("Did not write \(arrayPath) to disk")
         }
         
-        // MARK: - Sae and Read Dictionaries -
+        // MARK: - Save and Read Dictionaries -
         let monster = NSMutableDictionary()
         monster["name"] = "Goblin"
         monster["hp"] = 5
@@ -83,6 +83,16 @@ class ViewController: UIViewController {
         } else {
             print("Did not write to \(dictionaryPath) to disk")
         }
+        
+        // MARK: - Test new helper functions
+        print("---------------")
+        print(FileManager.contentsOfDir(url: FileManager.documentsDirectory))
+        print(FileManager.fileExistsInDocumentsDirectory(fileName: "playerName2.txt"))
+        FileManager.deleteFileInDocumentsDirectory(fileName: "playerName2.txt")
+        print(FileManager.contentsOfDir(url:FileManager.documentsDirectory))
+        print(FileManager.fileExistsInDocumentsDirectory(fileName: "playerName2.txt"))
+        FileManager.deleteFileInDocumentsDirectory(fileName: "bad-file-name.txt")
+  
     }
 
     override func didReceiveMemoryWarning() {
