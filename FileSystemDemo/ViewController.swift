@@ -68,6 +68,21 @@ class ViewController: UIViewController {
         } else {
             print("Did not write \(arrayPath) to disk")
         }
+        
+        // MARK: - Sae and Read Dictionaries -
+        let monster = NSMutableDictionary()
+        monster["name"] = "Goblin"
+        monster["hp"] = 5
+        monster["weapon"] = "Club"
+        let dictionaryPath = FileManager.filePathInDocumentsDirectory(fileName: "monster.plist")
+        let success2 = monster.write(to: dictionaryPath, atomically: true)
+        if success2 {
+            print("Wrote \(dictionaryPath) to disk")
+            // read it back from the disk
+            print(NSMutableDictionary(contentsOf: dictionaryPath))
+        } else {
+            print("Did not write to \(dictionaryPath) to disk")
+        }
     }
 
     override func didReceiveMemoryWarning() {
