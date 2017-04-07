@@ -22,4 +22,8 @@ extension FileManager {
         return self.default.urls(for: .cachesDirectory, in: .userDomainMask).first! as URL
     }
     
+    static func filePathInDocumentsDirectory(fileName: String)->URL {
+        return FileManager.documentsDirectory.appendingPathComponent(fileName)
+    }
+    
 }

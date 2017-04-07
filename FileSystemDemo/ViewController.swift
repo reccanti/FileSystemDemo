@@ -17,8 +17,8 @@ class ViewController: UIViewController {
         print(FileManager.cachesDirectory)
         let fileName = "playerName"
         let playerName = "Xander"
-//        let path = FileManager.documentsDirectory.appendingPathComponent(fileName).appendingPathExtension("txt")
-        let path = URL(fileURLWithPath: "badfile.txt")
+        let path = FileManager.documentsDirectory.appendingPathComponent(fileName).appendingPathExtension("txt")
+//        let path = URL(fileURLWithPath: "badfile.txt")
         
         // write the playerName to the documents folder
         do {
@@ -37,6 +37,22 @@ class ViewController: UIViewController {
             print(error)
             print("Unable to load file")
         }
+        
+        // use the FileSystem helper extension to write to a file
+        let playerName2 = "Anya"
+        let path2 = FileManager.filePathInDocumentsDirectory(fileName: "playerName2.txt")
+        do {
+            try playerName2.write(to: path2, atomically: true, encoding: String.Encoding.utf8)
+            print("Wrote file to \(path2)")
+        } catch {
+            print("Unable to write to file at path=\(path2)")
+            print(error)
+        }
+        
+        // write to filesystem using unhandled try!
+        let playerName3 = "Buffy"
+        let path3 = FileManager.filePathInDocumentsDirectory(fileName: "playerName3.txt")
+        try! playerName3.write(to: path3, atomically: true, encoding: String.Encoding.utf8)
     }
 
     override func didReceiveMemoryWarning() {
