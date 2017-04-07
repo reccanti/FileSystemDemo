@@ -93,6 +93,9 @@ class ViewController: UIViewController {
         print(FileManager.fileExistsInDocumentsDirectory(fileName: "playerName2.txt"))
         FileManager.deleteFileInDocumentsDirectory(fileName: "bad-file-name.txt")
   
+        // MARK: - Test clear helper function
+        FileManager.clearDocumentsFolder()
+        print(FileManager.contentsOfDir(url: FileManager.documentsDirectory))
     }
 
     override func didReceiveMemoryWarning() {

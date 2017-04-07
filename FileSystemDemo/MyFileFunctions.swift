@@ -55,4 +55,18 @@ extension FileManager {
         }
     }
     
+    static func clearDocumentsFolder() {
+        let fileManager = FileManager.default
+        let docsFolderPath = FileManager.documentsDirectory.path
+        do {
+            let filePaths = try fileManager.contentsOfDirectory(atPath: docsFolderPath)
+            for filePath in filePaths {
+                try fileManager.removeItem(atPath: docsFolderPath + "/" + filePath)
+            }
+            print("Cleared Documents folder")
+        } catch {
+            print("Could not clear Documents folder: \(error)")
+        }
+    }
+    
 }
